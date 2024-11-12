@@ -3,6 +3,7 @@
 ## Integrantes:
 
 - Marcelo Gross Borges (00344298)
+- Camila Maffi (00243691)
 
 ## Conceito de jogo
 
