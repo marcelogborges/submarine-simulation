@@ -133,7 +133,7 @@ int main()
     glm::mat4 the_view;
     glm::mat4 model;
 
-    Submarine Submarine(glm::vec4(0.0f,1.0f,0.0f,1.0f), 10.0f, 50.0f);
+    Submarine Submarine;
 
     float nearPlane = -0.1f;
     float farPlane  = -2000.0f;
@@ -165,7 +165,7 @@ int main()
     while (!glfwWindowShouldClose(window))
     {
         
-        glClearColor(0.2667f, 0.7255f, 1.0f, 1.0f); // R=68, G=185, B=255, A=1
+        glClearColor(0.2f, 0.663f, 0.804f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glUseProgram(GpuProgram.ID);
 
@@ -199,6 +199,8 @@ int main()
         Scenario.DrawShark(VirtualScene, GpuProgram);
 
         Scenario.DrawSand(VirtualScene, GpuProgram);
+
+        Scenario.Collisions(deltaTime, VirtualScene);
 
         // TextRendering(window, Submarine, Scenario);
 

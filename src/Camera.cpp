@@ -54,10 +54,10 @@ void Camera::Matrix(float fov, float nearPlane, float farPlane, Shader& shader, 
 void Camera::LookatMatrix(float fov, float nearPlane, float farPlane, Shader& shader, float deltaTime)
 {
     // Converte Position do submarino para vetor direção
-    glm::vec4 subDirection = submarine->Direction / norm(submarine->Direction);
+    glm::vec4 subRotation = submarine->Rotation / norm(submarine->Rotation);
     
     // Calcula a posição da câmera
-    Position = submarine->Position - (subDirection * 30.0f); // 10 unidades atrás
+    Position = submarine->Position - (subRotation * 30.0f); // 10 unidades atrás
     Position.y += 15.0f; // Ligeiramente acima do submarino
 
     // Calcula o vetor View como direção do olhar

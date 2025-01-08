@@ -3,9 +3,9 @@
 
 Scenario::Scenario(Submarine& sub) 
     : submarine(sub),
-      fish({glm::vec4(30.0f, 0.0f, 0.0f, 1.0f), 1.0f, 1.0f, 1.0f, glm::vec4(0.0f, 0.0f, 0.0f, 0.0f)}),
-      shark({glm::vec4(0.0f, 0.0f, 30.0f, 1.0f), 1.0f, 1.0f, 1.0f, glm::vec4(0.0f, 0.0f, 0.0f, 0.0f)}),
-      sand({glm::vec4(0.0f, -30.0f, 0.0f, 1.0f), 200.0f, 1.0f, 200.0f, glm::vec4(0.0f, 1.0f, 0.0f, 0.0f)})
+      fish({glm::vec4(30.0f, 0.0f, 0.0f, 1.0f), 5.0f, 5.0f, 5.0f, glm::vec4(0.0f, 0.0f, 0.0f, 0.0f)}),
+      shark({glm::vec4(0.0f, 0.0f, 30.0f, 1.0f), 5.0f, 5.0f, 10.0f, glm::vec4(0.0f, 0.0f, 0.0f, 0.0f)}),
+      sand({glm::vec4(0.0f, -30.0f, 0.0f, 1.0f), 200.0f, 1.0f, 200.0f, glm::vec4(0.0f, 0.0f, 0.0f, 0.0f)})
 {
 }
 
@@ -57,41 +57,32 @@ void Scenario::Collisions(float deltaTime, VirtualScene& virtualScene)
     Object subObject = GetSubmarineObject();
 
     // Check collision with fish
-    glm::vec4 fishCollision = CubeCubeCollision(subObject, fish, submarine.Direction);
-    if (fishCollision != movement)  // If collision occurred
+    bool fishCollision = CubeCubeCollision(subObject, fish, subObject.Direction);
+    if (fishCollision)  // If collision occurred
     {
-        // Reset fish position
+        // Reset fish position within specified ranges for X, Y, and Z
         fish.Position = glm::vec4(
-            static_cast<float>(rand() % 100 - 50),
-            0.0f,
-            static_cast<float>(rand() % 100 - 50),
+            static_cast<float>(rand() % 201 - 100),  // X-axis: range [-100, 100]
+            static_cast<float>(rand() % 50 - 25),    // Z-axis: range [-30, 30]
+            static_cast<float>(rand() % 201 - 100),  // Y-axis: range [-100, 100]
             1.0f
         );
     }
 
     // Check collision with shark
-    glm::vec4 sharkCollision = CubeCubeCollision(subObject, shark, movement);
-    if (sharkCollision != movement)  // If collision occurred
+    bool sharkCollision = CubeCubeCollision(subObject, shark, subObject.Direction);
+    if (sharkCollision)  // If collision occurred
     {   
-        // Reset submarine
-        submarine.Position = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
-        submarine.Direction = glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
-        submarine.speed = 0.0f;
-        submarine.vertical_speed = 0.0f;
-        submarine.rotate = 0.0f;
+        submarine.Reset();
         return;  // Skip further collision checks
     }
 
     // Check collision with sand using CubePlaneCollision
-    glm::vec4 sandCollision = CubePlaneCollision(subObject, movement, sand);
-    if (sandCollision != movement)  // If collision occurred
+    bool sandCollision = CubePlaneCollision(subObject, subObject.Direction, sand);
+    if (sandCollision)  // If collision occurred
     {
         // Reset submarine
-        submarine.Position = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
-        submarine.Direction = glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
-        submarine.speed = 0.0f;
-        submarine.vertical_speed = 0.0f;
-        submarine.rotate = 0.0f;
+        submarine.Reset();
         return;
     }
 }

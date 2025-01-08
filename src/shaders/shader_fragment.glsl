@@ -45,12 +45,7 @@ void main()
 
     vec4 p = position_world;
     vec4 n = normalize(normal);
-    vec4 light;
-    if(object_id == SAND) {
-        light = vec4(0.0, -1.0, 0.0, 0.0);
-    } else {
-        light = vec4(0.0, -0.8, -0.2, 0.0);
-    }
+    vec4 light = vec4(0.0, 1.0, 0.0, 0.0); 
     vec4 l = normalize(light);
     vec4 v = normalize(camera_position - p);
 
@@ -93,7 +88,6 @@ void main()
     // Lógica de iluminação para diferentes objetos
     if(object_id == SUBMARINE)
     {
-        // Submarino com iluminação de lambert
         color.rgb = lambert_gouraud * I * Kd0;
     }
     else if(object_id == SAND) {

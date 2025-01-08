@@ -21,7 +21,7 @@ bool PointPlaneCollision(glm::vec4 point_a, glm::vec4 point_b, Object plane){
 }
 
 
-glm::vec4 CubePlaneCollision(Object cube, glm::vec4 direction, Object plane){
+bool CubePlaneCollision(Object cube, glm::vec4 direction, Object plane){
     glm::vec4 points[8];
     int x = 0;
     for (float i = -1; i <= 1; i+=2){
@@ -42,15 +42,15 @@ glm::vec4 CubePlaneCollision(Object cube, glm::vec4 direction, Object plane){
     for (int i = 0; i < 8; i++){
         for (int j = 0; j < 8; j++){
             if (i != j && PointPlaneCollision(points[i]+direction_x,points[j]+direction_x,plane))
-                direction.x = 0;
+                return true;
             if (i != j && PointPlaneCollision(points[i]+direction_y,points[j]+direction_y,plane))
-                direction.y = 0;
+                return true;
             if (i != j && PointPlaneCollision(points[i]+direction_z,points[j]+direction_z,plane))
-                direction.z = 0;
+                return true;
         }
     }
 
-    return direction;
+    return false;
 }
 
 bool PointCubeCollision(Object cube1, Object cube2, glm::vec4 direction){
@@ -95,19 +95,19 @@ bool PointCubeCollision(Object cube1, Object cube2, glm::vec4 direction){
     return (inx && iny && inz);
 }
 
-glm::vec4 CubeCubeCollision(Object cube1, Object cube2, glm::vec4 direction){
+bool CubeCubeCollision(Object cube1, Object cube2, glm::vec4 direction){
     glm::vec4 direction_x = glm::vec4 (direction.x, 0.0f, 0.0f, 0.0f);
     glm::vec4 direction_y = glm::vec4 (0.0f, direction.y, 0.0f, 0.0f);
     glm::vec4 direction_z = glm::vec4 (0.0f, 0.0f, direction.z, 0.0f);
 
     if (PointCubeCollision(cube1, cube2, direction_x))
-        direction.x = 0;
+        return true;
 
     if (PointCubeCollision(cube1, cube2, direction_y))
-        direction.y = 0;
+        return true;
 
     if (PointCubeCollision(cube1, cube2, direction_z))
-        direction.z = 0;
+        return true;
 
-    return direction;
+    return false;
 }

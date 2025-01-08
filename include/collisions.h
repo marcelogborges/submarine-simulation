@@ -31,7 +31,7 @@ bool PointPlaneCollision(glm::vec4 point_a, glm::vec4 point_b, Object plane);
  * @param plane Objeto que representa o plano
  * @return Direção ajustada após a colisão
  */
-glm::vec4 CubePlaneCollision(Object cube, glm::vec4 direction, Object plane);
+bool CubePlaneCollision(Object cube, glm::vec4 direction, Object plane);
 
 /**
  * Verifica colisão entre dois cubos considerando uma direção de movimento
@@ -49,7 +49,7 @@ bool PointCubeCollision(Object cube1, Object cube2, glm::vec4 direction);
  * @param direction Direção do movimento
  * @return Direção ajustada após a colisão
  */
-glm::vec4 CubeCubeCollision(Object cube1, Object cube2, glm::vec4 direction);
+bool CubeCubeCollision(Object cube1, Object cube2, glm::vec4 direction);
 
 /**
  * Calcula o produto escalar entre dois vetores

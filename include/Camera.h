@@ -39,11 +39,8 @@ public:
 
 	Inputs inputs;
 
-	// Bezier Variables
-
 	void Update(float screenRatio, Submarine& submarine, Inputs inputs, bool cameraType);
 	void Matrix(float fov, float nearPlane, float farPlane, Shader& shader, float deltaTime);
-	void Draw();
 	
 private:
 	void LookatUpdate(float screenRatio, Submarine& submarine);
@@ -56,7 +53,5 @@ private:
 	glm::vec4 RotateView(float deltaTime); 
 	glm::vec4 ChangePosition(float deltaTime);
 
-	void CreateBezierCurve();
-	glm::vec4 MoveThroughBezier(float deltaTime);
 };
 #endif
