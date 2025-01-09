@@ -15,8 +15,14 @@ Marcelo Gross Borges - 00344298
   O ChatGPT foi utilizado durante a realização desse trabalho principalmente para realizar refatoração, limpeza e comentários no código, além de fazer esse README. Para implementação das features e requisitos principais IAs em geral não foram de muita ajuda.
 
 ## Desenvolvimento e aplicação de conceitos
-  - **Câmeras**: A câmera do tipo LookAt foi implementada como modo default de câmera, e está sempre posicionada atrás e levemente acima do submarino, se movimentando e rotacionando em consjunto com o submarino. A câmera do tipo FreeCamera foi implementada de forma a deixar o submarino estático e permitir uma movimentação totalmente livre por parte do usuário, controlada por mouse e teclado. 
-    
+  - **Câmeras**: A implementação do sistema de câmeras oferece dois modos: LookAt e Free Camera, alternando entre eles com base na interação do usuário. Ambos os modos utilizam matrizes de transformação para atualizar a posição e a orientação da câmera em tempo real, garantindo uma experiência visual fluida e consistente.
+
+    - LookAt: a câmera acompanha o submarino automaticamente. Sua posição é calculada a uma distância fixa atrás e acima do submarino, e o vetor de direção (View) é obtido a partir da diferença entre a posição do submarino e da câmera. O vetor Up permanece constante, garantindo que a câmera mantenha uma orientação estável.
+
+    - Câmera Livre: o usuário controla a câmera com o teclado e o mouse. A rotação é calculada com base no movimento do cursor, limitando o ângulo vertical para evitar ultrapassar o horizonte. A posição é atualizada conforme as teclas pressionadas, permitindo movimento fluido em todas as direções, com velocidade ajustada pelo delta time.
+  
+  - **Movimentação**: A movimentação do submarino foi desenvolvida com base em transformações geométricas e conceitos básicos de física. O sistema combina rotação e translação por meio de matrizes, onde a matriz final resulta da multiplicação da translação pela matriz de rotação no eixo Y. A direção do submarino é atualizada por um vetor normalizado que reflete a rotação atual, enquanto a velocidade horizontal é obtida multiplicando a direção pelo módulo da velocidade, com aceleração e desaceleração suaves para simular inércia. O movimento vertical é independente, permitindo deslocamento nos dois eixos ao somar as velocidades horizontal e vertical, garantindo um movimento tridimensional fluido. A rotação é controlada por ângulos normalizados entre -π e π para evitar overflow, e todas as transformações utilizam delta time, assegurando fluidez do movimento, independentemente da taxa de quadros.
+  
   - **Colisões**: Todos os objetos possuem colisões com o submarino. As colisões foram implementadas a partir de uma classe Object, que serve para mapear uma bounding box nos objetos. Foram implementadas três tipos de colisões:
 
     - Colisão Ponto-Plano (PointPlaneCollision): Detecta a colisão entre um segmento de linha (definido por dois pontos) e um plano. É utilizada como base para   detecção de colisões mais complexas e verifica se o ponto de intersecção está dentro dos limites do plano definidos por sua largura, altura e comprimento.
@@ -43,7 +49,7 @@ Marcelo Gross Borges - 00344298
 - Coletar os peixes enquanto foge do tubarão
 
 ### Mapeamento de teclas:
-- A, D == Rotacina o submarino
+- A, D == Rotaciona o submarino
 - W, S == Acelera e freia o submarino
 - LeftShift, LeftCtrl = Sobe e desce o submarino
 - SPACEBAR == Muda o modo da câmera
