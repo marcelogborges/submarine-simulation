@@ -50,9 +50,10 @@ Marcelo Gross Borges - 00344298
 - MOUSE == Move a direção da câmera no modo câmera livre
 
 ## Como Rodar
-
 O zip possui um arquivo main.exe na pasta /bin/Linux, bastando abrir este arquivo para rodar o jogo. 
-
-![image](https://github.com/user-attachments/assets/95b25c7a-d7ce-4b8f-9e29-63b0e8daa296)
-
 Se quiser compilar o jogo em seu pc, é necessário compilar o código usando make run.
+
+
+
+![image](https://github.com/user-attachments/assets/8ecc2dc6-aff9-4055-971b-6dad0d30010f)
+
