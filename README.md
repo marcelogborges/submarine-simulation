@@ -56,4 +56,6 @@ Se quiser compilar o jogo em seu pc, é necessário compilar o código usando ma
 
 
 ![image](https://github.com/user-attachments/assets/8ecc2dc6-aff9-4055-971b-6dad0d30010f)
+![image](https://github.com/user-attachments/assets/749b7050-8371-4bcb-beff-1f9bdd5e0743)
+
 
