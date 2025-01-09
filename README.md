@@ -1,4 +1,4 @@
-# TF_FCG
+# Submarine Simulation
 Marcelo Gross Borges - 00344298
 
 ## Contribuições de Marcelo:
