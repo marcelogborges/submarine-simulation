@@ -36,10 +36,10 @@ void TextRendering_Init();
 float TextRendering_LineHeight(GLFWwindow* window);
 float TextRendering_CharWidth(GLFWwindow* window);
 void TextRendering_PrintString(GLFWwindow* window, const std::string &str, float x, float y, float scale = 1.0f);
+void TextRendering_Fishes(GLFWwindow* window, float scale, int num_fishes);
 
 // Funções abaixo renderizam como texto na janela OpenGL algumas matrizes e
 // outras informações do programa. Definidas após main().
-// void TextRendering(GLFWwindow* window, Submarine& submarine, Scenario &Scenario);
 
 // Funções callback para comunicação com o sistema operacional e interação do
 // usuário. Veja mais comentários nas definições das mesmas, abaixo.
@@ -127,7 +127,6 @@ int main()
     glFrontFace(GL_CCW);
 
     // Variáveis auxiliares utilizadas para chamada à função
-    // TextRendering_ShowModelViewProjection(), armazenando matrizes 4x4.
     glm::mat4 the_projection;
     glm::mat4 the_model;
     glm::mat4 the_view;
@@ -201,12 +200,14 @@ int main()
         Scenario.DrawSand(VirtualScene, GpuProgram);
 
         Scenario.Collisions(deltaTime, VirtualScene);
-
-        // TextRendering(window, Submarine, Scenario);
+        
+        Scenario.BezierMovement(deltaTime);
 
         glfwSwapBuffers(window);
 
         glfwPollEvents();
+
+        TextRendering_Fishes(window, 1.0f, Scenario.num_fishes);
     }
 
     // Finalizamos o uso dos recursos do sistema operacional

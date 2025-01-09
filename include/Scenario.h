@@ -39,13 +39,16 @@ public:
     void DrawShark(VirtualScene& virtualScene, Shader& gpuProgram);
     void DrawSand(VirtualScene& virtualScene, Shader& gpuProgram);
     void Collisions(float deltaTime, VirtualScene& virtualScene);
+    void BezierMovement(float deltaTime);
+    int num_fishes = 0;
     
 private:
     Submarine& submarine;
     Object fish;
     Object shark;
     Object sand;
-    
+    float t = 0.0f;
+    float shark_rotation = -0.5f;
     Object GetSubmarineObject() const;
 };
 

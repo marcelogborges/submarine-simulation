@@ -78,7 +78,7 @@ void Submarine::Draw(VirtualScene &VirtualScene, Shader &GpuProgram, float delta
 
 void Submarine::Reset()
 {
-    Position = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+    Position = glm::vec4(30.0f, 1.0f, 30.0f, 1.0f);
     Direction = glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
     Rotation = glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
     speed = 0.0f;
